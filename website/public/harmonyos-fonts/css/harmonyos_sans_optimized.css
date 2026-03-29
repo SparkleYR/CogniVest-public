@@ -1,0 +1,57 @@
+@charset "UTF-8";
+/*!
+ * HarmonyOS Sans Optimized - Essential weights only
+ * Optimized for web performance
+ */
+
+/* Light */
+@font-face {
+    font-family: "HarmonyOS Sans";
+    src:
+        url("/harmonyos-fonts/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Light.woff2")
+            format("woff2"),
+        url("/harmonyos-fonts/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Light.woff")
+            format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Regular */
+@font-face {
+    font-family: "HarmonyOS Sans";
+    src:
+        url("/harmonyos-fonts/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Regular.woff2")
+            format("woff2"),
+        url("/harmonyos-fonts/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Regular.woff")
+            format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Medium */
+@font-face {
+    font-family: "HarmonyOS Sans";
+    src:
+        url("/harmonyos-fonts/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Medium.woff2")
+            format("woff2"),
+        url("/harmonyos-fonts/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Medium.woff")
+            format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Bold */
+@font-face {
+    font-family: "HarmonyOS Sans";
+    src:
+        url("/harmonyos-fonts/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Bold.woff2")
+            format("woff2"),
+        url("/harmonyos-fonts/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Bold.woff")
+            format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

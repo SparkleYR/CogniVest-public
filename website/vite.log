@@ -1,0 +1,28 @@
+nohup: ignoring input
+
+> cognivest-website@0.0.0 dev
+> vite
+
+Port 3000 is in use, trying another one...
+
+  VITE v8.0.2  ready in 164 ms
+
+  ➜  Local:   http://localhost:3001/
+  ➜  Network: use --host to expose
+1:48:23 AM [vite] (client) [console.warn] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+1:53:26 AM [vite] (client) hmr update /src/index.css, /src/components/ChatInterface.tsx
+2:11:36 AM [vite] (client) hmr update /src/index.css, /src/components/ChatInterface.tsx
+2:12:02 AM [vite] (client) hmr update /src/index.css, /src/components/ChatInterface.tsx
+2:12:20 AM [vite] (client) hmr update /src/index.css, /src/components/ChatInterface.tsx
+2:12:49 AM [vite] (client) hmr update /src/index.css, /src/components/ChatInterface.tsx
+2:31:23 AM [vite] (client) [console.warn] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2:33:25 AM [vite] (client) [console.warn] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2:33:31 AM [vite] (client) [console.warn] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2:37:16 AM [vite] (client) hmr update /src/index.css, /src/components/ChatInterface.tsx
+2:39:43 AM [vite] (client) [console.warn] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2:40:13 AM [vite] (client) [console.warn] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2:40:46 AM [vite] (client) hmr update /src/index.css, /src/components/ChatInterface.tsx
+2:41:12 AM [vite] (client) [console.warn] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+tatic position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+2:37:16 AM [vite] (client) hmr update /src/index.css, /src/components/ChatInterface.tsx
+2:40:46 AM [vite] (client) hmr update /src/index.css, /src/components/ChatInterface.tsx
