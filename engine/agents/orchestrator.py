@@ -2,16 +2,12 @@ import json
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from llm_client import chat_with_tools
-
 from agents.returns_agent    import ReturnsAgent
 from agents.allocation_agent import AllocationAgent
 from agents.risk_agent       import RiskAgent
 from agents.benchmark_agent  import BenchmarkAgent
 from agents.behaviour_agent  import BehaviourAgent
 from agents.simulation_agent import SimulationAgent
-
-
-# ── Tool definitions (OpenAI format) ────────────────────────────────────────
 TOOLS = [
     {
         "type": "function",
@@ -124,9 +120,7 @@ TOOLS = [
         },
     },
 ]
-
 SYSTEM_PROMPT = """You are a financial portfolio analysis assistant with access to specialist calculation agents.
-
 When a user asks about a portfolio:
 1. Call the relevant tool(s) to get precise numbers
 2. Synthesise the results into a clear, specific answer
@@ -137,8 +131,6 @@ When a user asks about a portfolio:
 You are also building a digital twin of the client. After answering, note any behavioural signals
 the portfolio data reveals (e.g. concentration bias, recency-driven decisions, STP patterns).
 """
-
-
 def _run_tool(name: str, inputs: dict, portfolio: dict) -> dict:
     if name == "get_returns":
         return ReturnsAgent().run(portfolio)
@@ -153,12 +145,9 @@ def _run_tool(name: str, inputs: dict, portfolio: dict) -> dict:
     if name == "run_simulation":
         return SimulationAgent().run(portfolio, inputs.get("n_paths", 200), years=inputs.get("years", 10))
     return {"error": f"Unknown tool: {name}"}
-
-
 def orchestrate(query: str, portfolio: dict, verbose: bool = False) -> str:
     """
     Run the orchestrator agentic loop via GLM-5 on OpenRouter.
-
     Args:
         query:     Natural language question about the portfolio
         portfolio: Structured portfolio dict
@@ -173,51 +162,36 @@ def orchestrate(query: str, portfolio: dict, verbose: bool = False) -> str:
             "content": f"Portfolio data:\n{json.dumps(portfolio, indent=2)}\n\nQuery: {query}",
         }
     ]
-
-    max_rounds = 6  # prevent infinite loops
+    max_rounds = 6
     for _ in range(max_rounds):
         msg = chat_with_tools(SYSTEM_PROMPT, messages, TOOLS)
-
         tool_calls = msg.get("tool_calls")
-
         if verbose:
             has_tools = bool(tool_calls)
             print(f"\n[Orchestrator] tool_calls={has_tools}, content_len={len(msg.get('content') or '')}")
-
-        # No more tool calls — final answer
         if not tool_calls:
             return msg.get("content") or ""
-
-        # Append assistant turn (with tool calls)
         messages.append({
             "role": "assistant",
             "content": msg.get("content"),
             "tool_calls": tool_calls,
         })
-
-        # Execute each tool and append results
         for tc in tool_calls:
             fn_name = tc["function"]["name"]
             try:
                 fn_args = json.loads(tc["function"]["arguments"])
             except (json.JSONDecodeError, KeyError):
                 fn_args = {}
-
             if verbose:
                 print(f"[Tool call] {fn_name}({list(fn_args.keys())})")
-
             result = _run_tool(fn_name, fn_args, portfolio)
-
             if verbose:
                 print(f"[Tool result] {json.dumps(result)[:300]}...")
-
             messages.append({
                 "role": "tool",
                 "tool_call_id": tc["id"],
                 "content": json.dumps(result),
             })
-
-    # Exceeded max rounds — ask for a plain text summary
     messages.append({"role": "user", "content": "Please summarise your findings in plain text now."})
     final = chat_with_tools(SYSTEM_PROMPT, messages, [])
     return final.get("content") or "Analysis complete — see tool results above."
